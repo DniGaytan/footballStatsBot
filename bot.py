@@ -1,6 +1,6 @@
 import tweepy
 import time
-import threading
+import json
 from footballData import *
 from secrets import *
 
