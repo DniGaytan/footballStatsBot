@@ -1,50 +1,37 @@
 import tweepy
 import time
-import json
-from footballData import *
+import leagueData, teamData
 from secrets import *
 
 ##############################################################################
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
-#API instance
-api = tweepy.API(auth)
-
-##############################################################################
-
-#Current supported teams by the bot
-supportedTeams = ['tigres'] 
-
-
-#Post weekly the supported teams next match
 def postNextMatches():
+	"Post weekly the supported teams next match"
+	for league in leagueData.leagues:
+		tweet = ""
+		for teamIndex in leagueData.leagues[league]:
+			print(tweet)
+			
 
-	#List for avoiding the repetition of a match
-	secondaryTeams = []
-
-	for team in supportedTeams:
-		if (not(team in secondaryTeams) and time.localtime().tm_wday == 1):
-
-			api.update_status('{} plays against {} on {} at {}'.format(team.capitalize(), 
-				teams[team]['nextMatch']['against'], 
-				teams[team]['nextMatch']['date'], 
-				teams[team]['nextMatch']['stadium']))
-
-			secondaryTeams.append(teams[team]['nextMatch']['against'])
-	return None
+	api.update_status(message)
 
 
-#Post weekly the supported leagues positions
-def postLeaguePositions():
-	pass
-	return None
+
+			
 
 
-########################
-#Main
-postNextMatches()
 
+###############################################################################
+
+if __name__ == '__main__':
+    # Constructs Twitter API instance
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+    api = tweepy.API(auth)
+
+    print(leagueData.leagues['ligaMX'])
+
+    #postNextMatches()
 
 
 
