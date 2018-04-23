@@ -1,0 +1,9 @@
+/nextmatch format team-againstTeam-stadium-date
+#nextmatch
+tigres-monterrey-estadio universitario-28/april/18
+
+
+/pastmatch format team-againstTeam-stadium-date-result
+#pastmatch
+tigres-necaxa-estadio victoria-21/april/18-1:1
+
