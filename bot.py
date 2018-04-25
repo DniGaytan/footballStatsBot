@@ -66,12 +66,32 @@ def tweetPastMatch(requestedTeam):
 	dataFile.close()
 
 
-def checkMentions(timeline, answeredTweets):
-	"""Retrieve all the mentions within the home timeline"""
 
-	#list to save all the mentions that appeared in the home timeline
-	mentions = [tweet for tweet in timeline if '@SoccerbotStats' in tweet.text and (not tweet.id in answeredTweets)]
-	return mentions
+def checkMentions():
+	"""Retrieve all the @SoccerbotStats mentions"""
+
+	followers = api.followers()
+	mentionTweets = []
+	followersTLindex = {}
+
+	for follower in followers:
+		firstTweet = True
+		for tweet in api.user_timeline(follower):
+			if '@SoccerbotStats' in tweet.text:
+				mentionTweets.append(tweet)
+				if firstTweet:
+					followersTLindex[tweet.screen_name] = tweet.id
+					firstTweet = False
+
+	return mentionTweets, followersTLindex
+
+
+
+
+
+
+	
+	
 
 
 
@@ -90,32 +110,11 @@ if __name__ == '__main__':
     auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
     api = tweepy.API(auth, wait_on_rate_limit=True)
 
-    answeredTweets = []
+    
+    mentionTweets, followersTLindex = checkMentions()
 
-    test = api.user_timeline()
-
-    for tweet in test:
-    	print(tweet, end="\n")
     
 
-    while True:
-		
-
-    	#list to save all the mentions that appeared in the home timeline
-    	mentions = checkMentions(timeline = api.user_timeline(), answeredTweets = answeredTweets)
-
-    	for tweet in mentions:
-    		tweetText = tweet.text.split()
-    		if tweetText[0] is 'nextMatch' or tweetText[0] is 'sigPartido':
-    			tweetNextMatch(tweetText[1])
-    		elif tweetText[0] is 'pastMatch' or tweetText[0] is 'pasPartido':
-    			tweetNextMatch(tweetText[1])
-    		else:
-    			api.update_status('Something went wrong :( | Algo salio mal :(', in_reply_to_status_id = tweet.id)
-    		answeredTweets.append(tweet.id)
-
-    	#sleep set at 30 seconds    	
-    	time.sleep(40)
 
 
 
