@@ -86,22 +86,6 @@ def checkMentions():
 	return mentionTweets, followersTLindex
 
 
-
-
-
-
-	
-	
-
-
-
-
-
-
-			
-
-
-
 ###############################################################################
 
 if __name__ == '__main__':
