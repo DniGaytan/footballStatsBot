@@ -1,9 +1,13 @@
-/nextmatch format team-againstTeam-stadium-date
+/nextmatch format team-againstTeam-stadium-date-
 #nextmatch
-tigres-monterrey-estadio universitario-28/april/18
+tigres-monterrey-estadio universitario-28/april/18-
 
 
-/pastmatch format team-againstTeam-stadium-date-result
+/pastmatch format team-againstTeam-stadium-date-result-
 #pastmatch
-tigres-necaxa-estadio victoria-21/april/18-1:1
+tigres-necaxa-estadio victoria-21/april/18-1:1-
+
+/teamdata format league-team-goals-againstgoals-wins-loses-draws-
+#teamdata
+ligamx-tigres-37-30-10-1-6-
 
